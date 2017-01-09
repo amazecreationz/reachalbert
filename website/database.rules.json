@@ -1,0 +1,35 @@
+{
+  "rules": {
+    "isAdmin":{
+        ".read": "root.child('admins').val().contains(auth.email)",
+        ".write": false
+    },
+    "admins":{
+      ".read": "root.child('admins').val().contains(auth.email)",
+      ".write": "root.child('admins').val().contains(auth.email)"
+    },
+    "read_allowed":{
+      ".read": "root.child('admins').val().contains(auth.email)",
+      ".write": "root.child('admins').val().contains(auth.email)"
+    },
+    "allowed_users":{
+      ".read": "root.child('read_allowed').val().contains(auth.email)",
+      ".write": "root.child('admins').val().contains(auth.email)"
+    },
+    "references": {
+      "$user": {
+          ".read": "root.child('admins').val().contains(auth.email) || (auth.uid === $user && auth.email == data.child('email').val())",
+          ".write": "root.child('admins').val().contains(auth.email) || (auth.uid === $user && auth.email == data.child('email').val())"
+      },
+      ".read": "root.child('admins').val().contains(auth.email)",
+      ".write": "root.child('admins').val().contains(auth.email)"
+    },
+    "users": {
+      "$user": {
+          ".read": "root.child('admins').val().contains(auth.email) || auth.uid === $user",
+          ".write": "root.child('admins').val().contains(auth.email) || auth.uid === $user"
+      }
+    }
+  }
+}
+

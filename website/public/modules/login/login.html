@@ -1,0 +1,5 @@
+<div class="padlr10" layout="row" layout-align="center center">
+    <div ng-if="!user_data.token" id="my-signin2"></div>
+    <div ng-if="user_data.token" id="my-signout2" class="mrglr10"><a href="#" ng-click="signOut();">Sign out</a></div>
+    <img ng-src="{{user_data.image}}">
+</div>

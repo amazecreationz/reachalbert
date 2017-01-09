@@ -1,0 +1,438 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body{
+  z-index: 0;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+main {
+  flex: 1 0 auto;
+}
+h1, h2, h3 {
+  margin: 5px 0px;
+}
+a {
+  color: #000;
+  font-weight: bold;
+}
+a:hover {
+  text-decoration: none!important;
+  font-weight: bolder;
+}
+a:focus, button:focus, md-icon:focus, :focus {
+  outline: none!important;
+}
+md-backdrop {
+  position: fixed;
+}
+.body-container {
+  height: 100%;
+  overflow: auto;
+}
+
+/*Sign In Container Classes Start*/
+.account-container {
+  width: 300px;
+}
+.account-details {
+  margin: 10px;
+}
+@media (min-width: 768px) {
+  .account-container {
+    min-width: 360px;
+  }
+  .account-details {
+    margin: 15px;
+  }
+}
+.account-details div {
+  line-height: 28px;
+}
+/*Sign In Container Classes End*/
+
+.float-button{
+  background-color: #d9534f;/*red*/
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border-width: 0px;
+  color: white;
+  font-size: 30px;
+  margin: 15px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+}
+/*Color Schemes Start*/
+.bg-body-color {
+  background-color: #FAFAFA!important;
+}
+.bg-body-color, .bg-body-color .material-icons {
+  color: #888!important;
+}
+.bg-transparent {
+  background-color: transparent!important;
+}
+.bg-white {
+  background-color: #fff!important;
+}
+.bg-blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+.text-dark {
+  color: #333!important;
+}
+.fa {
+  color: #333;
+}
+.app-circle {
+  border-color: #333;
+}
+.bg-pencil {
+  background: url(/resources/images/pencil.jpg) no-repeat center center fixed;
+}
+.bg-welcome {
+  background: url(/resources/images/welcome.jpg) no-repeat center center fixed;
+}
+.bg-notepad {
+  background: url(/resources/images/notepad.jpg) no-repeat center center fixed;
+}
+.bg-crew {
+  background: url(/resources/images/crew.jpg) no-repeat center center fixed;
+}
+.bg-brush {
+  background: url(/resources/images/brush.jpg) no-repeat center center fixed;
+}
+/*Color Schemes Start*/
+.back-to-top {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  color: white;
+  background: #111;
+  padding: 10px;
+  border-radius: 100%;
+  z-index: 999;
+  opacity: 0.5;
+}
+.back-to-top:hover, .opaque {
+  opacity: 1;
+}
+.logo {
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+}
+.about-logo {
+  width: 170px;
+  height: 170px;
+  border: 1px solid #ccc;
+}
+md-sidenav.md-sidenav-left{
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 9999;
+  min-width: 240px;
+  width: 240px;
+}
+.md-raised {
+	padding: 0 10px;
+}
+.sticky-toolbar {
+  position: fixed;
+  top: 0;
+  transition: background-color 0.5s ease;
+  z-index: 9998;
+}
+.full-container {
+  width: 100%;
+  padding: 0;
+}
+
+.section-img-container, .img-strip-container {
+  display: table;
+  height: 50%;
+  position: relative;
+  width: 100%;
+}
+.section-img-container {
+  height: 75vh;
+}
+.img-strip-container {
+  height: 200px;
+}
+.chart-container {
+  height: 250px!important;
+}
+.bg-tinted {
+  background-color: rgba(200,100,0,.5);
+  background-blend-mode: multiply;
+}
+.bg-fixed {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.page-title {
+  border: 2px solid #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+.section-container {
+  background-color: #FAFAFA;
+  overflow: hidden;
+  min-height: 60vh;
+  padding: 10px;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .section-container {
+    padding: 50px 10px;
+  }
+}
+.section-header {
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  padding: 0px 5px;
+}
+.section-body {
+  font-size: 16px;
+  padding: 20px 5px;
+}
+.section-footer {
+  border-top: 1px solid #ddd;
+  width: 100%;
+  padding-top: 10px;
+}
+.message-container {
+  overflow-y: auto;
+  padding: 0 15px 0 0;
+}
+.message-box {
+  padding: 5px 0; 
+  border-bottom: 1px solid #ddd;
+}
+.message-user-image {
+  width: 50px;
+  height: 50px;
+  background-size: 50px;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+.message-body {
+  margin: 15px;
+  word-wrap: break-word;
+}
+.message-instn {
+  border-left: 1px solid #ddd;
+  padding: 0 20px;
+  margin-left: 5px;
+}
+.message-instn-admin {
+  border-right: 1px solid #ddd;
+  padding: 0 10px;
+  margin-right: 10px;
+}
+.message-container, .message-instn, .message-instn-admin {
+  height: 50vh;
+  max-height: 500px!important;
+}
+@media (max-width: 768px) {
+  .message-user-image {
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
+  }
+  .message-body {
+    margin: 10px 5px;
+  }
+  .message-instn, .message-instn-admin {
+    height: auto;
+    margin: 15px 0;
+    border-left: none;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding: 0;
+  }
+  .message-instn-admin {
+    border-right: none;
+    border-bottom: none;
+  }
+}
+.admin-select {
+  padding: 10px;
+}
+.admin-select-image {
+  width: 30px;
+  height: 30px;
+  background-size: 30px!important;
+  background-repeat: no-repeat!important;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+@media (max-width: 768px) {
+  .admin-select-image {
+    width: 20px;
+    height: 20px;
+    background-size: 20px!important;
+    margin: 0 5px;
+  }
+}
+
+
+.app-circle {
+  border: 2px solid;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+  transition: background-color 0.5s ease;
+}
+.app-circle md-icon {
+  font-size: 60px;
+  margin: 20px;
+  width: 60px;
+  height: 60px;
+  color: #000;
+}
+.app-circle:hover, .app-circle:focus {
+  background-color: #000;
+}
+.app-circle:hover md-icon, .app-circle:focus md-icon {
+  color: #fff;
+}
+.app-to-action {
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+}
+.app-to-action md-icon {
+  font-size: 25px;
+  margin: 10px;
+  width: 25px;
+  height: 25px;
+}
+.footer {
+  border-top: 1px solid #e4e7ed;
+  width: 100%;
+  padding: 60px 0 80px;
+  background-color: #000;
+  color: #fff;
+  min-height: 50vh;
+}
+.footer .logo {
+  height: 100px;
+  width: 100px!important;
+  margin: 30px;
+}
+.footer .list-title {
+  padding-bottom: 15px;
+  font-weight: bold;
+  color: #616161;
+}
+.footer a {
+  color: #9E9E9E;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+.footer a:hover {
+  color: #fff;
+}
+.footer .fa, .footer md-icon{
+  color: inherit;
+}
+.footer-list div {
+  height: 24px;
+  color: #9E9E9E;
+} 
+.footer .social-icons {
+  border-top: 1px solid #9E9E9E;
+  padding: 10px;
+  margin: 120px 0 10px;
+}
+.footer .social-icons .fa{
+  font-size: 32px;
+  margin: 5px 15px;
+}
+.footer .copyright .fa{
+  color: #d9534f;/*red*/
+}
+/*NavBar Classes Start*/
+.main-menu {
+  list-style: none;
+  padding: 10px;
+}
+.main-menu li {
+  list-style-position: inside;
+  padding: 10px 0;
+}
+.main-menu li span {
+  font-size: 24px;
+  text-transform: uppercase;
+  padding: 0 10px 0;
+}
+
+/*NavBar Classes End*/
+           
+.loader, .loader-drop, .loader-message{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.loader-drop {
+  opacity: 0.4;
+  background: #333;
+}
+
+.loader-icon {
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 80px;
+  height: 80px;
+  z-index: 9999;
+}
+
+/*GPA Calculator Classes Start*/
+.gpa-results-table {
+  font-size: 16px;
+}
+.gpa-results-table tr td{
+  padding: 5px 5px 0;
+}
+.gpa-results-table tr td:first-child {
+  white-space:nowrap;
+  padding-right: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/*GPA Calculator Classes End*/
+
+/*Angular Material Workarounds Start*/
+.md-select-menu-container {
+  z-index: 999!important;
+}
+.md-fab {
+  min-width: 56px!important;
+  min-height: 56px!important;
+}
+/*Angular Material Workarounds Start*/
