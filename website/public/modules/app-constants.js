@@ -30,13 +30,18 @@ ReachAlbert.constants = {
 			actions: [{
 				key: 'NONE',
 				name: 'None',
-				param_1: 'User\'s Question',
+				param_1: 'User\'s Query',
 				param_2: 'Albert\'s Response'
 			},{
 				key: 'LINK',
 				name: 'Link Responses',
 				param_1: 'Parent Response',
 				param_2: 'New Response'
+			},{
+				key: 'RM',
+				name: 'Delete',
+				param_1: 'Query',
+				param_2: false
 			},{
 				key: 'CUSTOM',
 				name: 'Custom Action',

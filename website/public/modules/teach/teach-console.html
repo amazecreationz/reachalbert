@@ -6,7 +6,7 @@
 <div class="section-container">
 	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 pad0" layout="column" layout-align="start center">
 		<md-content flex="auto" class="md-whiteframe-4dp col-xs-12 pad20 mrgbot20" layout="column" layout-align="start start">
-			<div class="section-header text-size-c">Teach Me Here</div>
+			<div class="section-header text-size-c">Teach Me Here<span class="pull-right pointer" ng-click="toggleLock()" ><i ng-if="locked" class="material-icons">lock</i><i ng-if="!locked" class="material-icons">lock_open</i><md-tooltip>Lock/Unlock</md-tooltip></span></div>
 			<md-content class="section-body col-xs-12">
 				<div ng-show="user_data.is_user_signed" layout="row" layout-xs="column" layout-align="start start">
 

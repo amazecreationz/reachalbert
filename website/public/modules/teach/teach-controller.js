@@ -60,6 +60,8 @@ ReachAlbert.controller('TeachController', ['$scope', '$state', '$stateParams', '
     	var cleaned_message = angular.copy(message);
     	cleaned_message = cleaned_message.replace(/\'/g, '');
     	cleaned_message = cleaned_message.replace(/\?/g, '');
+    	cleaned_message = cleaned_message.replace(/\!/g, '');
+    	cleaned_message = cleaned_message.replace(/\./g, '');
     	cleaned_message = cleaned_message.replace(/ /g, '_');
     	return cleaned_message.toUpperCase();
     }
@@ -84,8 +86,9 @@ ReachAlbert.controller('TeachController', ['$scope', '$state', '$stateParams', '
     $scope.teachAlbert = function() {
     	var currentUser = firebase.auth().currentUser;
     	if(currentUser && $scope.teach.type != '' && $scope.teach.param_1 !=''){
+    		$scope.teach.action = $scope.action.key;
     		var db_ref = firebase.database().ref('users/'+currentUser.uid+'/messages');
-    		var teach_message = 'TEACH ' +$scope.teach.type +' ' +getCleanedMessage($scope.teach.param_1) +' ' +removeSpaces($scope.teach.param_2)+' ' +$scope.teach.action;
+    		var teach_message = 'TEACH ' +$scope.teach.type +' ' +getCleanedMessage($scope.teach.param_1) +' ' +($scope.teach.action=='LINK' ? getCleanedMessage($scope.teach.param_2) : removeSpaces($scope.teach.param_2))+' ' +$scope.teach.action;
 	    	console.log(teach_message)
 	    	var message = {
 		      text: teach_message,

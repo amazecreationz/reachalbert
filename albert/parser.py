@@ -17,16 +17,25 @@ def getCleanedMessage(message):
 	cleaned_message = message;
 	cleaned_message = cleaned_message.replace('\'', '');
 	cleaned_message = cleaned_message.replace('?', '');
+	cleaned_message = cleaned_message.replace('!', '');
+	cleaned_message = cleaned_message.replace('.', '');
 	cleaned_message = cleaned_message.replace(' ', '_');
 	return cleaned_message.upper();
+	
+def getCleanedReply(reply):
+	cleaned_reply = reply;
+	cleaned_reply = cleaned_reply.replace("'", "\'");
+	cleaned_reply = cleaned_reply.replace(" ", "_");
+	return cleaned_reply;
 	
 def parse_message(message):
 	parts = message.split(' ');
 	if parts[0].upper() == 'TEACH':
 		table = getTable(parts[1]);
 		try:
+			alberts_message = 'Thanks!';
 			word = getCleanedMessage(parts[2]);
-			reply = parts [3];
+			reply = getCleanedReply(parts[3]);
 			action = parts[4] if len(parts) > 4 else "none";
 			sql.START();
 			query = "SELECT HASH FROM "+table+"_hash WHERE VALUE='%s'" % (word.upper());
@@ -37,15 +46,22 @@ def parse_message(message):
 				key = sql_data[0][0].split(',')[0];
 				
 			if action.upper() == 'LINK':
-				word = reply.replace('_', ' ').upper();
+				query = "INSERT INTO "+table+"_hash VALUES('%s', '%s') ON DUPLICATE KEY UPDATE HASH='%s'" % (key, getCleanedMessage(reply), key);
+				sql.INSERT(query);
+				alberts_message = 'Linked "'+ reply+'" with "' +word +'"';	
+			elif action.upper() == 'RM':
+				query = "DELETE FROM "+table+"_hash WHERE VALUE='%s'" % (word);
+				sql.REMOVE(query);
+				alberts_message = word +' Deleted';
 			else:
 				query = "INSERT INTO "+table+" VALUES('%s', '%s', '%s') ON DUPLICATE KEY UPDATE REPLY=CONCAT_WS(',',REPLY,'%s')" % (key, action, reply, reply);
 				sql.INSERT(query);
+				query = "INSERT IGNORE INTO "+table+"_hash VALUES('%s', '%s')" % (key, word);
+				sql.INSERT(query);
+				alberts_message = 'New Response Learned - '+word;
 			
-			query = "INSERT IGNORE INTO "+table+"_hash VALUES('%s', '%s')" % (key, word);
-			sql.INSERT(query);
 			sql.END();
-			return "Thanks!"
+			return alberts_message;
 		except:
 			return "Check your syntax!"
 	else:

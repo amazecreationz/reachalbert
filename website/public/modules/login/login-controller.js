@@ -13,7 +13,6 @@ ReachAlbert.controller('LoginController', ['$scope', '$state', '$stateParams', f
 		var provider = new firebase.auth.GoogleAuthProvider();
 		provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
 		firebase.auth().signInWithPopup(provider).then(function(result) {
-			console.log(JSON.stringify(result.user))
 		}).catch(function(error) {
 	        if (error.code === 'auth/account-exists-with-different-credential') {
 	        	alert('You have already signed up with a different auth provider for that email.');
