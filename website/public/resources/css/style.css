@@ -241,6 +241,7 @@ md-sidenav.md-sidenav-left{
   border-left: 1px solid #ddd;
   padding: 0 20px;
   margin-left: 5px;
+  overflow-y: auto;
 }
 .message-instn-admin {
   border-right: 1px solid #ddd;
@@ -250,6 +251,10 @@ md-sidenav.md-sidenav-left{
 .message-container, .message-instn, .message-instn-admin {
   height: 50vh;
   max-height: 500px!important;
+}
+.message-container .teach, .message-instn .teach {
+  height: 60vh;
+  max-height: 600px!important;
 }
 @media (max-width: 768px) {
   .message-user-image {

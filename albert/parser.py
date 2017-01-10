@@ -12,15 +12,20 @@ def getTable(type):
 		return table[type.upper()];
 	except:
 		return None;
+		
+def getCleanedMessage(message):
+	cleaned_message = message;
+	cleaned_message = cleaned_message.replace('\'', '');
+	cleaned_message = cleaned_message.replace('?', '');
+	cleaned_message = cleaned_message.replace(' ', '_');
+	return cleaned_message.upper();
 	
 def parse_message(message):
 	parts = message.split(' ');
 	if parts[0].upper() == 'TEACH':
 		table = getTable(parts[1]);
 		try:
-			print "here"
-			
-			word = parts[2].replace('_', ' ').upper();
+			word = getCleanedMessage(parts[2]);
 			reply = parts [3];
 			action = parts[4] if len(parts) > 4 else "none";
 			sql.START();
@@ -46,16 +51,13 @@ def parse_message(message):
 	else:
 		table = 'conversations'
 		try:
-			print "here"
 			sql.START();
-			query = "SELECT HASH FROM "+table+"_hash WHERE VALUE='%s'" % (message.upper());
+			query = "SELECT HASH FROM "+table+"_hash WHERE VALUE='%s'" % (getCleanedMessage(message));
 			sql_data = sql.READ(query)[0];
 			hash_key = sql_data[0].split(',')[0];
 			query = "SELECT ACTION, REPLY FROM "+table+" WHERE HASH='%s'" % (hash_key);
 			sql_data = sql.READ(query)[0];
 			action = sql_data[0];
-			print sql_data
-			print sql_data[1]
 			reply = random.choice(sql_data[1].split(',')).replace('_', ' ');
 			sql.END();
 			return reply;

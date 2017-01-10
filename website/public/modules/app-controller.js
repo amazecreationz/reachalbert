@@ -10,10 +10,7 @@ ReachAlbert.controller('MainController', ['$scope', '$state',  '$rootScope', '$h
 
 	$rootScope.user_data = {}
 
-	var signin_script = document.createElement("script");
-	signin_script.type = "text/javascript";
-	signin_script.src = "https://apis.google.com/js/platform.js?onload=renderButton";
-	$("head").append(signin_script);
+	
 
 	var isUserEqual = function(googleUser, firebaseUser) {
 	  if (firebaseUser) {
@@ -28,50 +25,17 @@ ReachAlbert.controller('MainController', ['$scope', '$state',  '$rootScope', '$h
 	  return false;
 	}
 
-	var checkAdmin = function() {
-    	var db_ref = firebase.database().ref('admins');
-    	$rootScope.user_data.isAdmin = false;
-		firebase.database().ref('isAdmin').on('value', function(data){
-			if(data.val()){
-				$rootScope.user_data.isAdmin = data.val();
-				$scope.$apply();
-			}	
-		})
+    $scope.login = function() {
+    	$state.go('login', {redirect: $state.current.name != 'home'? $state.current.name : 'console'});
     }
 
-	$scope.onSignIn = function(googleUser){//OPTIMISE THIS LATER
-		var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
-			unsubscribe();
-			if (!isUserEqual(googleUser, firebaseUser)) {
-				var credential = firebase.auth.GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
-				firebase.auth().signInWithCredential(credential).catch(function(error) {
-					console.log(JSON.stringify(error));
-				});
-			}
-		});
-		
-		var googleUserProfile = googleUser.getBasicProfile();
-		var id_token = googleUser.getAuthResponse().id_token;
-		$rootScope.user_data = {
-			name: googleUserProfile.getName(),
-			nickname: googleUserProfile.getGivenName(),
-			email: googleUserProfile.getEmail(),
-			image: googleUserProfile.getImageUrl(),
-			token: id_token
-		}		
-		$scope.$apply();
-		$('.dropdown-button').dropdown('close');
-		Materialize.toast('Signed in as '+$rootScope.user_data.name, 3000);
-		checkAdmin();
-	}
-
 	$scope.signOut = function() {
-		var auth2 = gapi.auth2.getAuthInstance();
-		auth2.signOut().then(function () {
-			console.log('User signed out.');
+		firebase.auth().signOut().then(function() {
 			Materialize.toast('Signed out successfully', 3000);
 			$rootScope.user_data = {};
 			$scope.$apply();
+		}, function(error) {
+		  // An error happened.
 		});
 	}
 
@@ -107,6 +71,30 @@ ReachAlbert.controller('MainController', ['$scope', '$state',  '$rootScope', '$h
     		$('.body-container').addClass('flow');
     	$scope.locked = !$scope.locked;
     }
+
+    firebase.auth().onAuthStateChanged(function(user) {
+    	if(user){
+	    	$rootScope.user_data = {
+				name: user.displayName,
+				nickname: user.displayName,
+				email: user.email,
+				image: user.photoURL,
+				uid: user.uid,
+				is_email_verified: user.emailVerified,
+				isAdmin: false,
+				is_user_signed: true
+			}
+			$scope.$apply();
+			Materialize.toast('Signed in as '+$rootScope.user_data.name, 3000);
+			firebase.database().ref('isAdmin').on('value', function(data){
+				if(data.val()){
+					$rootScope.user_data.isAdmin = data.val();
+					$scope.$apply();
+				}	
+			})
+		}
+    })
+
 }]);
 
 ReachAlbert.controller('HomeController', ['$scope', '$state', '$stateParams', '$rootScope', function($scope, $state, $stateParams, $rootScope){

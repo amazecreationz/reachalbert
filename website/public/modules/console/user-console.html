@@ -8,22 +8,22 @@
 		<md-content flex="auto" class="md-whiteframe-4dp col-xs-12 pad20 mrgbot20" layout="column" layout-align="start start">
 			<div class="section-header text-size-c">Hello Albert!<span class="pull-right pointer" ng-click="toggleLock()" ><i ng-if="locked" class="material-icons">lock</i><i ng-if="!locked" class="material-icons">lock_open</i><md-tooltip>Lock/Unlock</md-tooltip></span></div>
 			<md-content class="section-body col-xs-12" layout="row" layout-align="start start">
-				<div ng-if="user_data.token" class="col-xs-12 col-sm-8 pad0">
+				<div ng-if="user_data.is_user_signed" class="col-xs-12 col-sm-8 pad0">
 					<div id="message-container" class="message-container col-xs-12"></div>
 					<form class="mrgtop30 col-xs-12 pad0" layout="row" layout-align="center center" ng-submit="sendMessage()">
 						<md-input-container class="mrg0" flex>
 				          	<label>Type your message here</label>
 				          	<input class="mrg0" ng-model="message.text" autocomplete="off">
 				        </md-input-container>
-				        <md-button id="send-message" class="md-fab md-primary" ng-click="sendMessage()"><md-icon class="material-icons txt24">send</md-icon></md-button>
+				        <md-button id="send-message" class="md-fab md-primary" ng-click="sendMessage()" aria-label="Send Message"><md-icon class="material-icons txt24">send</md-icon></md-button>
 					</form>
 				</div>
-				<div ng-if="user_data.token" class="col-xs-12 col-sm-4 message-instn" hide-xs>
+				<div ng-if="user_data.is_user_signed" class="col-xs-12 col-sm-4 message-instn" hide-xs>
 					<div class="txt18 border-bottom-1">Instructions:</div>
 					<div class="mrgtop10">Type in your message and send it! Albert will reply if he is not asleep.</div>
 				</div>
-				<div ng-if="!user_data.token">
-					<a class="pointer" ng-click="openSignIn()">Sign In</a> to use this feature.
+				<div ng-if="!user_data.is_user_signed">
+					<a class="pointer" ng-click="login()">Sign In</a> to use this feature.
 				</div>
 			</md-content>
 		</md-content>

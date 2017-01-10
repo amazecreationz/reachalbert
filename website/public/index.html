@@ -74,7 +74,8 @@
     <script type="text/javascript" src="modules/app-constants.js"></script>
     <script type="text/javascript" src="modules/admin/admin-controller.js"></script>
     <script type="text/javascript" src="modules/console/console-controller.js"></script>
-    <script type="text/javascript" src="modules/login/login-scripts.js"></script>
+    <script type="text/javascript" src="modules/login/login-controller.js"></script>
+    <script type="text/javascript" src="modules/teach/teach-controller.js"></script>
     <script type="text/javascript" src="modules/common/common-controller.js"></script>
     <script type="text/javascript" src="modules/common/common-directives.js"></script>
     <script type="text/javascript" src="modules/widgets/widget-directives.js"></script>
@@ -99,24 +100,21 @@
                         <span class="pointer" ui-sref="home">Reach Albert</span>
                     </div>
                     <div class="padlr20">
-                        <span class="dropdown-button pointer" data-beloworigin="true" data-constrainwidth="false" data-activates="login-dd">
-                            <i ng-if="!user_data.token" class="material-icons text-grey">account_circle</i>
-                            <i ng-if="user_data.token"><img class="circle" width="24px" height="auto" ng-src="{{user_data.image}}"></i>
-                        </span>
-                        <div id='login-dd' class='dropdown-content pad10 z-depth-3'>
-                            <div layout="row" layout-align="start center" ng-class="user_data.token ? 'account-container' : ''">
-                                <div ng-show="user_data.token" class="pad15 vertical-divider" layout="row" layout-align="center center">
+                        <md-icon ng-if="!user_data.is_user_signed" class="material-icons text-grey pointer txt24" ng-click="login()">account_circle</md-icon>
+                        <span ng-show="user_data.is_user_signed" class="dropdown-button pointer" data-beloworigin="true" data-constrainwidth="false" data-activates="login-dd"><img class="circle" width="24px" height="auto" ng-src="{{user_data.image}}"></span>
+                        <div id='login-dd' class='dropdown-content pad10 z-depth-3 mrgtop25'>
+                            <div layout="row" layout-align="start center" ng-class="user_data.is_user_signed ? 'account-container' : ''">
+                                <div class="pad15 vertical-divider" layout="row" layout-align="center center">
                                     <img class="circle" width="80px" height="auto" ng-src="{{user_data.image}}">
                                 </div>
-                                <div ng-show="user_data.token" class="account-details" layout="column" layout-align="start start">
+                                <div class="account-details" layout="column" layout-align="start start">
                                     <div class="mrg0">{{user_data.name}}</div>
                                     <div class="txt14 mrg0 text-grey">{{user_data.email}}</div>
                                     <div class="mrgl-10" layout="row" layout-align="start start">
-                                        <md-button ng-show="user_data.token && showConsoleButton" id="show-client" class="mrglr10 md-primary md-raised md-hue-2" ui-sref="console">Console</md-button>  
-                                        <md-button ng-show="user_data.token" id="my-signout2" class="mrglr10 md-warn md-raised md-hue-2 pointer" ng-click="signOut();">SIGN OUT</md-button>                            
+                                        <md-button ng-show="user_data.is_user_signed && showConsoleButton" id="show-client" class="mrglr10 md-primary md-raised md-hue-2" ui-sref="console">Console</md-button>  
+                                        <md-button ng-show="user_data.is_user_signed" id="my-signout2" class="mrglr10 md-warn md-raised md-hue-2 pointer" ng-click="signOut();">SIGN OUT</md-button>                            
                                     </div>
                                 </div>
-                                <div ng-show="!user_data.token" id="my-signin2"></div>
                             </div>
                             
                         </div>

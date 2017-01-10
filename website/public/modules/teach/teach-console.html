@@ -1,0 +1,60 @@
+<div class="section-img-container bg-transparent">
+	<div layout="column" layout-fill layout-align="center center">
+      <div class="text-size-b text-white title-border text-uppercase">Teach Albert</div>
+    </div>
+</div>
+<div class="section-container">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 pad0" layout="column" layout-align="start center">
+		<md-content flex="auto" class="md-whiteframe-4dp col-xs-12 pad20 mrgbot20" layout="column" layout-align="start start">
+			<div class="section-header text-size-c">Teach Me Here</div>
+			<md-content class="section-body col-xs-12">
+				<div ng-show="user_data.is_user_signed" layout="row" layout-xs="column" layout-align="start start">
+
+					<div ng-show="user_data.isAdmin" class="col-xs-12 col-sm-8 pad0">
+						<div id="message-container" class="message-container teach col-xs-12"></div>
+					</div>
+					<div ng-show="user_data.isAdmin" class="col-xs-12 col-sm-4 message-instn teach"  layout="column">
+						<form class="col-xs-12 pad0 mrgtop10" layout="column" ng-submit="teachAlbert()">
+				        	<md-input-container class="mrgtb10">
+				        		<label>Response Type</label>
+					          	<md-select ng-model="teach.type" aria-label="Teach Type">
+					            	<md-option ng-repeat="type in types" ng-value="type.key">
+					            		{{type.name}}
+					            	</md-option>
+					          	</md-select>
+					        </md-input-container>
+					        <md-input-container ng-if="action.param_1" class="mrgtb10">
+				        		<label>{{action.param_1}}</label>
+					            <input class="mrg0" ng-model="teach.param_1" autocomplete="off">
+					        </md-input-container>
+					        <md-input-container ng-if="action.param_2" class="mrgtb10">
+				        		<label>{{action.param_2}}</label>
+					            <input class="mrg0" ng-model="teach.param_2" autocomplete="off">
+					        </md-input-container>
+					        <md-input-container class="mrgtb10">
+				        		<label>Action</label>
+					          	<md-select ng-model="action" aria-label="Action">
+					            	<md-option ng-repeat="action in actions" ng-value="action">
+					            		{{action.name}}
+					            	</md-option>
+					          	</md-select>
+					        </md-input-container>
+					        <md-input-container ng-if="action.key == 'CUSTOM'" class="mrgtop10 mrgbot0">
+				        		<label>Custom Action</label>
+					            <input class="mrg0" ng-model="teach.action" autocomplete="off">
+					        </md-input-container>
+					        <md-button id="send-teach-message" class="md-primary md-raised" ng-click="teachAlbert()" aria-label="Send Message">TEACH ALBERT</md-button>
+					    </form>
+					</div>
+					<div ng-if="!user_data.isAdmin" hide-xs>
+						You don't have sufficient permissons to use this feature.
+					</div> 
+				</div>
+				<div ng-if="!user_data.is_user_signed">
+					<a class="pointer" ng-click="login()">Sign In</a> to use this feature.
+				</div>
+				
+			</md-content>
+		</md-content>
+	</div>
+</div>

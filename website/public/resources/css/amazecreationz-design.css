@@ -59,7 +59,10 @@
 }
 .padbot0 {
   padding-bottom: 0px!important;
-}s
+}
+.padbot5 {
+  padding-bottom: 5px!important;
+}
 .padbot10 {
   padding-bottom: 10px!important;
 }
@@ -100,6 +103,9 @@
 .mrg0 {
   margin: 0px!important;
 }
+.mrg5 {
+  margin: 5px;
+}
 .mrg10 {
 	margin: 10px;
 }
@@ -124,6 +130,9 @@
 .mrgtop20 {
   margin-top: 20px!important;
 }
+.mrgtop25 {
+  margin-top: 25px!important;
+}
 .mrgtop30 {
   margin-top: 30px!important;
 }
@@ -135,6 +144,9 @@
 }
 .mrgbot0 {
   margin-bottom: 0px!important;
+}
+.mrgbot5 {
+  margin-bottom: 5px!important;
 }
 .mrgbot10 {
   margin-bottom: 10px!important;
@@ -259,6 +271,9 @@
 }
 .border-bottom {
   border-bottom: 2px solid #333;
+}
+.border-white {
+  border-color: white;
 }
 .text-white {
 	color: white;

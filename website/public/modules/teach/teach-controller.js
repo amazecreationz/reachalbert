@@ -1,14 +1,19 @@
-ReachAlbert.controller('AdminController', ['$scope', '$state', '$stateParams', '$rootScope', '$filter', function($scope, $state, $stateParams, $rootScope, $filter){
-	console.log("AdminController");
+ReachAlbert.controller('TeachController', ['$scope', '$state', '$stateParams', '$rootScope', '$filter', function($scope, $state, $stateParams, $rootScope, $filter){
+	console.log("TeachController");
 	$(window).resize();
-	$('title').html("Reach Albert | Admin Console");
+	$('title').html("Reach Albert | Teach");
 	$('.body-container').animate({scrollTop : 0}, 800);
 
     $scope.$parent.showConsoleButton = true;
     $rootScope.bck_image = "connected.jpg";
-    $scope.message = {
-    	text:'',
-    	to: '',
+    $scope.types = angular.copy(ReachAlbert.constants.albert.teach.types);
+    $scope.actions = angular.copy(ReachAlbert.constants.albert.teach.actions);
+    $scope.action = $scope.actions[0];
+    $scope.teach = {
+    	type: 'CONVO',
+    	param_1: '',
+    	param_2: '',
+    	action: '',
     };
 
     var MSG_TEMPLATE = {
@@ -22,7 +27,7 @@ ReachAlbert.controller('AdminController', ['$scope', '$state', '$stateParams', '
     	if (!div) {
 		    var container = document.createElement('div');
 		    var FINAL_MSG_TEMPLATE = '<div class="message-box layout-row layout-align-start-center">';
-		    if(data.from != 'Admin') {
+		    if(data.from) {
 		    	FINAL_MSG_TEMPLATE += MSG_TEMPLATE.USER_IMAGE;
 		    	FINAL_MSG_TEMPLATE += '<div class="message-body text-left flex">'
 		    	FINAL_MSG_TEMPLATE += MSG_TEMPLATE.MESSAGE;
@@ -51,11 +56,18 @@ ReachAlbert.controller('AdminController', ['$scope', '$state', '$stateParams', '
   		MSG_CONTAINER.focus();
     }
 
-    var clearMessages = function(){
-    	var MSG_CONTAINER = document.getElementById('message-container');
-    	while (MSG_CONTAINER.hasChildNodes()) {
-		    MSG_CONTAINER.removeChild(MSG_CONTAINER.lastChild);
-		}
+    var getCleanedMessage = function(message) {
+    	var cleaned_message = angular.copy(message);
+    	cleaned_message = cleaned_message.replace(/\'/g, '');
+    	cleaned_message = cleaned_message.replace(/\?/g, '');
+    	cleaned_message = cleaned_message.replace(/ /g, '_');
+    	return cleaned_message.toUpperCase();
+    }
+
+    var removeSpaces = function(message) {
+    	var cleaned_message = angular.copy(message);
+    	cleaned_message = cleaned_message.replace(/ /g, '_');
+    	return cleaned_message;
     }
 
     var loadMessages = function(ref) {
@@ -69,43 +81,35 @@ ReachAlbert.controller('AdminController', ['$scope', '$state', '$stateParams', '
     	});
     }
 
-    var getUsers = function() {
-    	var db_ref = firebase.database().ref('references');
-    	$scope.users = {};
-    	db_ref.limitToLast(20).on('child_added', function(data){
-    		$scope.users[data.key] = data.val();
-    		$scope.$apply();
-    	});
-    }
-
-    $scope.sendMessage = function() {
+    $scope.teachAlbert = function() {
     	var currentUser = firebase.auth().currentUser;
-    	if(currentUser && $scope.message.text != '' && $scope.message.to !=''){
-    		var db_ref = firebase.database().ref('users/'+$scope.message.to+'/messages');
+    	if(currentUser && $scope.teach.type != '' && $scope.teach.param_1 !=''){
+    		var db_ref = firebase.database().ref('users/'+currentUser.uid+'/messages');
+    		var teach_message = 'TEACH ' +$scope.teach.type +' ' +getCleanedMessage($scope.teach.param_1) +' ' +removeSpaces($scope.teach.param_2)+' ' +$scope.teach.action;
+	    	console.log(teach_message)
 	    	var message = {
-		      text: $scope.message.text,
-		      image: '/resources/images/logos/logo-large.jpg',
-		      from: 'Admin',
+		      text: teach_message,
+		      image: $rootScope.user_data.image,
+		      name: $rootScope.user_data.name,
               time: new Date().getTime()
 		    }
 
-		    $scope.message.text = '';
-		    db_ref.push(message).then().catch(function(error) {
-		      console.error('Error writing new message to Firebase Database: ', error);
+		    $scope.teach.param_1 = '';
+		    $scope.teach.param_2 = '';
+		    var newMsgKey = db_ref.push().key;
+		    var updates = {};
+  			updates['users/'+currentUser.uid+'/messages/'+newMsgKey] = message;
+ 			updates['users/'+currentUser.uid+'/newmessages/'+newMsgKey] = message;
+		    
+		    firebase.database().ref().update(updates).then().catch(function(error) {
+		    	console.error('Error writing new message to Firebase Database: ', error);
 		    });
     	}
     }
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			$scope.message.to = user.uid;
-			getUsers();
 	    	loadMessages('users/'+user.uid+'/messages');
 		}
 	});
-
-	$scope.getUserMessages = function(){
-		clearMessages();
-		loadMessages('users/'+$scope.message.to+'/messages');
-	}
 }]);

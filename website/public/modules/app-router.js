@@ -6,6 +6,16 @@ ReachAlbert.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 		controller: 'HomeController'
 	});
 
+
+	$stateProvider.state('login', {
+		url:'/login',
+		params: {
+			redirect: 'console'
+		},
+		templateUrl: '/modules/login/login.html',
+		controller: 'LoginController'
+	});
+
 	$stateProvider.state('console', {
 		url:'/console',
 		templateUrl: '/modules/console/user-console.html',
@@ -16,6 +26,12 @@ ReachAlbert.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 		url:'/admin',
 		templateUrl: '/modules/admin/admin-console.html',
 		controller: 'AdminController'
+	});
+
+	$stateProvider.state('teach', {
+		url:'/teach',
+		templateUrl: '/modules/teach/teach-console.html',
+		controller: 'TeachController'
 	});
 
 	$locationProvider.html5Mode(true);

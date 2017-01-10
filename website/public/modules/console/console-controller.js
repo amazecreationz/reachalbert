@@ -79,10 +79,6 @@ ReachAlbert.controller('ConsoleController', ['$scope', '$state', '$stateParams',
     	});*/
     }
 
-    $scope.openSignIn = function() {
-    	$('.dropdown-button').dropdown('open');
-    }
-
     $scope.sendMessage = function() {
     	var currentUser = firebase.auth().currentUser;
     	if(currentUser && $scope.message.text != ''){
@@ -102,7 +98,7 @@ ReachAlbert.controller('ConsoleController', ['$scope', '$state', '$stateParams',
 
 			firebase.database().ref().update(updates).then().catch(function(error) {
 		    	console.error('Error writing new message to Firebase Database: ', error);
-		    });;
+		    });
     	}
     }
 
