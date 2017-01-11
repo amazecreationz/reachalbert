@@ -1,6 +1,5 @@
-**/user-handler/node_modules
-./user-handler/service-account.json
-**/message-handler/node_modules
-./message-handler/service-account.json
-./albert/*.pyc
-
+*.pyc
+.project
+service-account.json
+**/user-handler/node_modules/
+**/message-handler/node_modules/
