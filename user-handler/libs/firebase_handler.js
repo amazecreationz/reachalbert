@@ -5,7 +5,7 @@ var serviceAccount = require("../service-account.json");
 
 firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),
-    databaseURL: "https://reach-albert.firebaseio.com"
+    databaseURL: "https://reachalbert-ai.firebaseio.com"
 });
 
 var db = firebase.database();

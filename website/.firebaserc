@@ -1,5 +1,5 @@
 {
   "projects": {
-    "reachalbert": "reach-albert"
+    "default": "reachalbert-ai"
   }
 }

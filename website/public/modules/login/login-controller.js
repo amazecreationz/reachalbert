@@ -6,13 +6,13 @@ ReachAlbert.controller('LoginController', ['$scope', '$state', '$stateParams', f
 
     /*var signin_script = document.createElement("script");
 	signin_script.type = "text/javascript";
-	signin_script.src = "https://apis.google.com/js/platform.js?onload=renderButton";
+	signin_script.src = "https://apis.google.com/js/platform.js";
 	$("head").append(signin_script);*/
 
 	$scope.signIn = function() {
 		var provider = new firebase.auth.GoogleAuthProvider();
 		provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
-		firebase.auth().signInWithPopup(provider).then(function(result) {
+		firebase.auth().signInWithRedirect(provider).then(function(result) {
 		}).catch(function(error) {
 	        if (error.code === 'auth/account-exists-with-different-credential') {
 	        	alert('You have already signed up with a different auth provider for that email.');
