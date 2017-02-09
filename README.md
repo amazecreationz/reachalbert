@@ -5,7 +5,7 @@ Reach Albert is an aritificial intelligence program by [Amaze Creationz](http://
 
 ##### Backend:
 
- - npm and nodejs
+ - JAVA
  - Python
  - Redis Cache
  - MySQL
@@ -18,12 +18,10 @@ Reach Albert is an aritificial intelligence program by [Amaze Creationz](http://
  
 ## Startup
 
- * copy service-account.json to user-handler and message-handler folders.
+ * add service-account.json to GlobalConstant.java in albert-heart.
  * create databases 'reachalbert' and 'readalbert_read_only' in MySQL. (Check for users provided in the code too.)
- * run user-handler.
+ * run albert-heart(Main JAVA File - com.amazecreationz.reachalbert.StartAlbert.java).
  * run redis cache and set up keyspace notifications.
- * run message-handler.
- * run main.py script in albert.
  * You are done and Albert is listening. 
 
 ## Teach Albert
