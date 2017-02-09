@@ -1,5 +1,46 @@
+body{
+  z-index: 0;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+h1, h2, h3 {
+  margin: 5px 0px;
+}
+a {
+  color: #000;
+  font-weight: bold;
+}
+a:hover, a:focus {
+  text-decoration: none!important;
+  font-weight: bolder!important;
+  color: #000;
+}
+a:focus, button:focus, md-icon:focus, :focus {
+  outline: none!important;
+}
 
 
+/*Sign In Container Classes Start*/
+.account-container {
+  width: 300px;
+}
+.account-details {
+  margin: 10px;
+}
+@media (min-width: 768px) {
+  .account-container {
+    min-width: 350px;
+  }
+  .account-details {
+    margin: 15px;
+  }
+}
+.account-details div {
+  line-height: 28px;
+}
+/*Sign In Container Classes End*/
 
 
 /*Special Classes Start*/
@@ -20,10 +61,130 @@
 }
 /*Special Classes End*/
 
+/*Custom Scrollbar Classes Start*/
+/*.body-container::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+.body-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.body-container::-webkit-scrollbar-thumb {
+  background-color: #BDBDBD;
+	border: 1px solid #4DB6AC;
+  border-radius: 5px;
+}*/
+/*Custom Scrollbar Classes End*/
 
+/*Container Classes Start*/
+html, body, .body-container, .main-container, .full-container {
+  height: 100%;
+}
+.body-container, .full-container {
+  overflow-y: auto;
+}
+.full-container {
+  padding: 10px;
+}
+.section-container {
+  background-color: #FAFAFA;/*body color*/
+  overflow: hidden;
+  min-height: 60vh;
+  padding: 10px;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .section-container {
+    padding: 50px 10px;
+  }
+}
+.section-header {
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  padding: 0px 5px;
+}
+.section-body {
+  font-size: 16px;
+  padding: 20px 5px;
+}
+.section-footer {
+  border-top: 1px solid #ddd;
+  width: 100%;
+  padding-top: 10px;
+}
+.section-img-container, .img-strip-container {
+  display: table;
+  position: relative;
+  width: 100%;
+}
+.section-img-container {
+  height: 60vh;
+}
+.img-strip-container {
+  height: 200px;
+}
+.chart-container {
+  height: 250px!important;
+}
+/*Container Classes End*/
 
 
 /*General Classes Start*/
+.nav-cyan {
+  background-color: #00838F!important;
+  color: #E0F7FA;
+}
+.bg-body-color {
+  background-color: #FAFAFA!important;/*body color*/
+  color: #666!important;
+}
+.bg-transparent {
+  background-color: transparent!important;
+}
+.bg-white {
+  background-color: #fff!important;
+}
+.bg-green {
+  background-color: #5cb85c!important;/*green*/
+}
+bg-red {
+  background-color: #d9534f!important;/*red*/
+}
+.bg-blue {
+  background-color: #337ab7!important;/*blue*/
+}
+.bg-cyan {
+  background-color: #0097A7!important;/*cyan*/
+  color: #E0F7FA;/*cyan*/
+}
+.bg-grey {
+  background-color: #424242!important;/*grey*/
+}
+.bg-yellow {
+  background-color: #CDDC39!important;/*yellow*/
+}
+.bg-blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+.bg-tinted {
+  background-color: rgba(200,100,0,.5);
+  background-blend-mode: multiply;
+}
+.bg-fixed {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .auto-height {
   height: auto!important;
 }
@@ -100,6 +261,10 @@
   padding-top: 0px!important;
   padding-bottom: 0px!important;
 }
+.padtb10 {
+  padding-top: 10px!important;
+  padding-bottom: 10px!important;
+}
 .mrg0 {
   margin: 0px!important;
 }
@@ -163,7 +328,7 @@
 .mrgbot50 {
   margin-bottom: 50px!important;
 }
-.mrgtb10 {
+.mrgtb10 {!important
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -189,7 +354,7 @@
 .mrglr5 {
   margin-left: 5px;
   margin-right: 5px;
-}
+}!important
 .mrglr-5 {
   margin-left: -5px;
   margin-right: -5px;
@@ -217,6 +382,9 @@
 .vh-70 {
   height: 70vh!important;
 }
+.vh-100 {
+  height: 100vh!important;
+}
 .ht100 {
   height: 100px!important;
 }
@@ -228,6 +396,9 @@
 }
 .ht500 {
   height: 500px!important;
+}
+.lh-50 {
+  line-height: 50px!important;
 }
 .full-width {
   width: 100%!important;
@@ -275,20 +446,29 @@
 .border-white {
   border-color: white;
 }
+.border-grey {
+  border-color: #424242;/*grey*/
+}
 .text-white {
 	color: white;
 }
+.text-dark {
+  color: #333!important;
+}
 .text-blue {
-  color: #337ab7;/*blue*/
+  color: #337ab7!important;/*blue*/
+}
+.text-cyan {
+   color: #E0F7FA!important;/*cyan*/
 }
 .text-red {
-  color: #d9534f;/*red*/
+  color: #d9534f!important;/*red*/
 }
 .text-grey {
-  color: #757575;/*grey*/
+  color: #424242!important;/*grey*/
 }
 .text-black {
-  color: #000;/*black*/
+  color: #000!important;/*black*/
 }
 .text-underline {
   text-decoration: underline;
@@ -316,6 +496,9 @@
 }
 .txt24 {
   font-size: 24px!important;
+}
+.txt28 {
+  font-size: 28px!important;
 }
 .txt32 {
   font-size: 32px!important;
@@ -356,7 +539,7 @@
     font-size: 30px!important;
   }
   .text-size-d {
-    font-size: 28px!important;
+    font-size: 26px!important;
   }
 }
 @media (min-width: 1200px) {
@@ -375,28 +558,16 @@
     font-size: 32px!important;
   }
   .text-size-d {
-    font-size: 30px!important;
+    font-size: 28px!important;
   }
 }
 .word-wrap {
   word-wrap: break-word;
 }
-.img-box-red, .img-box-green, .img-box-blue, .img-box-grey, .img-box-yellow {
-  height: 150px;
-}
-.img-box-green, .btn-green, .btn-green-sm, .bg-green {
-  background-color: #5cb85c!important;/*green*/
-}
-.img-box-red, .btn-red, .btn-red-sm, .bg-red {
-  background-color: #d9534f!important;/*red*/
-}
-.img-box-blue, .btn-blue, .btn-blue-sm, .bg-blue {
-  background-color: #337ab7!important;/*blue*/
-}
-.img-box-grey, .btn-grey, .btn-grey-sm, .bg-grey {
-  background-color: #616161!important;/*grey*/
-}
-.img-box-yellow, .btn-yellow, .btn-yellow-sm, .bg-yellow, .jumbotron {
-  background-color: #CDDC39!important;/*yellow*/
-}
 /*General Classes End*/
+
+/*Table Classes Start*/
+table td {
+  padding: 5px;
+}
+/*Table Classes End*/

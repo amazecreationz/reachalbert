@@ -1,11 +1,10 @@
 ReachAlbert.controller('TeachController', ['$scope', '$state', '$stateParams', '$rootScope', '$filter', function($scope, $state, $stateParams, $rootScope, $filter){
-	console.log("TeachController");
 	$(window).resize();
 	$('title').html("Reach Albert | Teach");
 	$('.body-container').animate({scrollTop : 0}, 800);
 
-    $scope.$parent.showConsoleButton = true;
     $rootScope.bck_image = "connected.jpg";
+	$scope.$parent.current_tab = "teach";
     $scope.types = angular.copy(ReachAlbert.constants.albert.teach.types);
     $scope.actions = angular.copy(ReachAlbert.constants.albert.teach.actions);
     $scope.action = $scope.actions[0];
@@ -89,20 +88,22 @@ ReachAlbert.controller('TeachController', ['$scope', '$state', '$stateParams', '
     		$scope.teach.action = $scope.action.key;
     		var db_ref = firebase.database().ref('users/'+currentUser.uid+'/messages');
     		var teach_message = 'TEACH ' +$scope.teach.type +' ' +getCleanedMessage($scope.teach.param_1) +' ' +($scope.teach.action=='LINK' ? getCleanedMessage($scope.teach.param_2) : removeSpaces($scope.teach.param_2))+' ' +$scope.teach.action;
-	    	console.log(teach_message)
 	    	var message = {
-		      text: teach_message,
-		      image: $rootScope.user_data.image,
 		      name: $rootScope.user_data.name,
+              email: $rootScope.user_data.email,
+              uid: $rootScope.user_data.uid,
+              text: teach_message,
+              image: $rootScope.user_data.image,
               time: new Date().getTime()
 		    }
 
-		    $scope.teach.param_1 = '';
-		    $scope.teach.param_2 = '';
 		    var newMsgKey = db_ref.push().key;
 		    var updates = {};
   			updates['users/'+currentUser.uid+'/messages/'+newMsgKey] = message;
- 			updates['users/'+currentUser.uid+'/newmessages/'+newMsgKey] = message;
+            message = angular.extend(message, $scope.teach);
+ 			updates['users/teach/'+newMsgKey] = message;
+            $scope.teach.param_1 = '';
+            $scope.teach.param_2 = '';
 		    
 		    firebase.database().ref().update(updates).then().catch(function(error) {
 		    	console.error('Error writing new message to Firebase Database: ', error);

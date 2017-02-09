@@ -1,0 +1,51 @@
+<div class="full-container bg-body-color">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 pad0 mrgtop20">
+        <page-title data="profile_title" theme="globals.theme"></page-title>
+        <md-content class="md-whiteframe-4dp pad10 mrgtop20" layout="row" layout-xs="column" layout-align="start start" layout-align-xs="center center">
+            <div ng-if="!user_data.is_user_signed" class="pad10" ng-bind-html="globals.not_signed_message"></div>
+            <div ng-if="user_data.is_user_signed" class="mrg10">
+                <img width="200" ng-src="{{user_data.image}}">
+            </div>
+            <div ng-if="user_data.is_user_signed" class="pad10" flex layout="column" layout-align-xs="start center">
+                <table>
+                    <tbody class="txt14">
+                        <tr>
+                            <td class="text-bold">Name</td>
+                            <td>{{user_data.name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">Nick Name</td>
+                            <td>
+                                <span ng-if="!edit_profile">{{user_data.nickname}}</span>
+                                <md-input-container ng-if="edit_profile" class="mrg0" flex>
+                                    <input class="mrg0" ng-model="user_data.nickname" autocomplete="off" aria-label="Nick Name">
+                                </md-input-container>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">Email</td>
+                            <td>{{user_data.email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">User ID</td>
+                            <td class="word-wrap">{{user_data.uid}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form ng-if="set_password" class="mrgtop30 col-xs-12 col-sm-6 pad0" layout="row" layout-align="center center" ng-submit="setPassword()">
+                    <md-input-container class="mrg0" flex>
+                        <label>Password</label>
+                        <input class="mrg0" type="password" ng-attr-type="{{show_password ? 'text' : 'password'}}" ng-model="password.value" autocomplete="off">
+                        <md-icon class="material-icons txt20 mrgtop10" ng-class="show_password ? 'text-grey' : 'text-{{globals.theme}}'" ng-click="show_password = !show_password">remove_red_eye</md-icon>
+                    </md-input-container>
+                </form>
+                <div class="mrgtop20 mrgl-5">
+                    <md-button ng-if="set_password" class="md-raised md-primary padlr10" ng-click="setPassword()">SET PASSWORD</md-button>
+                    <md-button ng-if="edit_profile" class="mrglr5 md-raised md-primary pointer" ng-click="saveProfile();">SAVE</md-button>
+                    <md-button ng-if="set_password || edit_profile" class="mrglr5 md-raised pointer" ng-click="cancel();">CANCEL</md-button>
+                    <md-button ng-if="!set_password && !edit_profile" class="mrglr5 md-warn md-raised pointer md-hue-2" ng-click="signOut();">SIGN OUT</md-button>
+                </div>
+            </div>
+        </md-content>
+    </div>
+</div>

@@ -1,5 +1,7 @@
 *.pyc
-.project
 service-account.json
-**/user-handler/node_modules/
-**/message-handler/node_modules/
+**/albert-heart/lib/
+**/albert-heart/build/
+**/albert-heart/.gradle/
+**/albert-heart/.idea/
+

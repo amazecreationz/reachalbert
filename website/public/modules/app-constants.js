@@ -1,19 +1,46 @@
 ReachAlbert.constants = {
 	mainTabs:[{
-		id: 0,
+		id: 'home',
 		name:'Home',
 		icon: 'home',
-		state: 'home.welcome'
+		state: 'home',
+		permission: 5
 	},{
-		id: 1,
-		name:'Applications',
-		icon: 'apps',
-		state: 'apps.details',
+		id: 'profile',
+		name:'My Profile',
+		icon: 'account_box',
+		state: 'profile',
+		permission: 4
 	},{
-		id: 2,
+		id: 'console',
+		name:'Console',
+		icon: 'message',
+		state: 'console',
+		permission: 4
+	},{
+		id: 'admin',
+		name:'Admin Console',
+		icon: 'bubble_chart',
+		state: 'admin',
+		permission: 0
+	},{
+		id: 'teach',
+		name:'Teach Albert',
+		icon: 'school',
+		state: 'teach',
+		permission: 1
+	},{
+		id: 'blog',
+		name:'Blog',
+		icon: 'book',
+		state: 'blog.home',
+		permission: 5
+	},{
+		id: 'contact',
 		name:'Get in Touch',
 		icon: 'contacts',
-		state: 'contact'
+		state: 'contact',
+		permission: 5
 	}],
 	albert: {
 		teach: {

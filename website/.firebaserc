@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "reachalbert-ai"
+    "default": "reachalbert-ai",
+    "hosting": "reachalbert-ai"
   }
 }

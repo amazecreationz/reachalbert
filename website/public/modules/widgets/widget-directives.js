@@ -1,5 +1,24 @@
 ReachAlbert.widgets = angular.module('ReachAlbert.widgets' ,[])
 
+/*
+widget: Loader Widget
+data: Containes loader object {
+	data: Title and Menu (if present) Data
+	theme: website theme
+}
+*/
+ReachAlbert.widgets.directive('pageTitle', [function() {
+	return {
+		restrict:'E',
+		scope: {
+			data: '=',
+			theme: '='
+		},
+		templateUrl: '/modules/widgets/page-title.html',
+		link: function (scope, elements, attributes) {
+		}
+	}
+}]);
 
 /*
 widget: Loader Widget

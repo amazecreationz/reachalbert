@@ -1,0 +1,17 @@
+<div class="pad15 md-whiteframe-4dp" ng-class="'bg-{{theme}}'" layout="row" layout-align="start start">
+    <div class="txt24 padlr10" flex>{{data.title}}</div>
+    <div class="pad0">
+        <md-menu ng-show="data.menu" md-position-mode="target-right target" md-offset="0 10">
+            <md-button class="md-icon-button pad0 mrg0" ng-click="$mdOpenMenu()">
+                <md-icon class="material-icons txt24" ng-class="'text-{{theme}}'">more_vert</md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="menuItem in data.menu">
+                    <md-button class="txt18 padlr10" ng-click="menuItem.function()">
+                        <md-icon class="material-icons txt20">{{menuItem.icon}}</md-icon>{{menuItem.name}}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</div>

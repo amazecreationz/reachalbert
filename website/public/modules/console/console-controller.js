@@ -1,11 +1,10 @@
 ReachAlbert.controller('ConsoleController', ['$scope', '$state', '$stateParams', '$rootScope', '$filter', function($scope, $state, $stateParams, $rootScope, $filter){
-	console.log("ConsoleController");
 	$(window).resize();
 	$('title').html("Reach Albert | Console");
 	$('.body-container').animate({scrollTop : 0}, 800);
 
-    $scope.$parent.showConsoleButton = false;
     $rootScope.bck_image = "connected.jpg";
+	$scope.$parent.current_tab = "console";
     $scope.message = {
     	text:''
     };
@@ -55,16 +54,6 @@ ReachAlbert.controller('ConsoleController', ['$scope', '$state', '$stateParams',
     	msg.parentNode.removeChild(msg);
     }
 
-    var setUserDetails = function(user) {
-    	var db_ref = firebase.database().ref('references/'+user.uid);
-    	var info = {
-	      name: user.displayName,
-	      email: user.email,
-	      image: user.photoURL
-	    }
-	    db_ref.set(info);
-    }
-
     var loadMessages = function(ref) {
     	var db_ref = firebase.database().ref(ref);
     	db_ref.off();
@@ -82,29 +71,40 @@ ReachAlbert.controller('ConsoleController', ['$scope', '$state', '$stateParams',
     $scope.sendMessage = function() {
     	var currentUser = firebase.auth().currentUser;
     	if(currentUser && $scope.message.text != ''){
+    		var updates = {};
     		var db_ref = firebase.database().ref('users/'+currentUser.uid+'/messages');
-	    	var message = {
-		      name: $rootScope.user_data.name,
-		      text: $scope.message.text,
-		      image: $rootScope.user_data.image,
-              time: new Date().getTime()
-		    }
+    		var newMsgKey = db_ref.push().key;
+    		if(!$rootScope.status.server_online) {
+    			var message = {
+			      from: 'Admin',
+			      text: 'Albert is sleeping right now. Please try after some time. :)' ,
+			      image: '/resources/images/logos/logo-large.jpg',
+	              time: new Date().getTime()
+			    }
+			    setMessage(newMsgKey, message);
+    		}
+    		else {			
+		    	var message = {
+			      name: $rootScope.user_data.name,
+			      text: $scope.message.text,
+			      email: $rootScope.user_data.email,
+			      uid: $rootScope.user_data.uid,
+			      image: $rootScope.user_data.image,
+	              time: new Date().getTime()
+			    }
+			    updates['users/'+currentUser.uid+'/messages/'+newMsgKey] = message;
+	 			updates['users/messages/'+newMsgKey] = message;
 
-		    $scope.message.text = '';
-		    var newMsgKey = db_ref.push().key;
-		    var updates = {};
-  			updates['users/'+currentUser.uid+'/messages/'+newMsgKey] = message;
- 			updates['users/'+currentUser.uid+'/newmessages/'+newMsgKey] = message;
-
-			firebase.database().ref().update(updates).then().catch(function(error) {
-		    	console.error('Error writing new message to Firebase Database: ', error);
-		    });
+				firebase.database().ref().update(updates).then().catch(function(error) {
+			    	console.error('Error writing new message to Firebase Database: ', error);
+			    });
+    		}
+		    $scope.message.text = '';	
     	}
     }
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			setUserDetails(user);
 	    	loadMessages('users/'+user.uid+'/messages');
 		}
 	});

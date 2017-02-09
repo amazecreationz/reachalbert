@@ -1,11 +1,10 @@
 ReachAlbert.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider){
-
+	
 	$stateProvider.state('home', {
 		url:'/',
 		templateUrl: '/modules/welcome.html',
 		controller: 'HomeController'
 	});
-
 
 	$stateProvider.state('login', {
 		url:'/login',
@@ -14,6 +13,18 @@ ReachAlbert.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 		},
 		templateUrl: '/modules/login/login.html',
 		controller: 'LoginController'
+	});
+
+	$stateProvider.state('profile', {
+		url:'/profile',
+		templateUrl: '/modules/profile/my-profile.html',
+		controller: 'ProfileController'
+	});
+
+	$stateProvider.state('profile.password', {
+		url:'/password',
+		templateUrl: '/modules/profile/my-profile.html',
+		controller: 'ProfileController'
 	});
 
 	$stateProvider.state('console', {

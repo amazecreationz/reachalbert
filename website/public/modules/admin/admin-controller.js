@@ -1,11 +1,10 @@
 ReachAlbert.controller('AdminController', ['$scope', '$state', '$stateParams', '$rootScope', '$filter', function($scope, $state, $stateParams, $rootScope, $filter){
-	console.log("AdminController");
 	$(window).resize();
 	$('title').html("Reach Albert | Admin Console");
 	$('.body-container').animate({scrollTop : 0}, 800);
 
-    $scope.$parent.showConsoleButton = true;
     $rootScope.bck_image = "connected.jpg";
+	$scope.$parent.current_tab = "admin";
     $scope.message = {
     	text:'',
     	to: '',
